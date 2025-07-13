@@ -6,9 +6,13 @@ public class NumberProcessingStrategy implements InputProcessingStrategy {
 
     @Override
     public String getOutput(String inputString) {
-        int value = Integer.parseInt(inputString);
-        if (value > NUMBER_VALUE_FOR_PRINT_HELLO) {
-            return HELLO_MESSAGE;
+        try {
+            double value = Double.parseDouble(inputString);
+            if (value > NUMBER_VALUE_FOR_PRINT_HELLO) {
+                return HELLO_MESSAGE;
+            }
+        } catch (NumberFormatException exception) {
+            return DEFAULT_OUTPUT_MESSAGE;
         }
 
         return DEFAULT_OUTPUT_MESSAGE;

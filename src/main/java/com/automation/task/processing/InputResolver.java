@@ -3,7 +3,7 @@ package com.automation.task.processing;
 import com.automation.task.processing.strategy.NumberArrayProcessingStrategy;
 
 public class InputResolver {
-    private static final String NUMERIC_REGEX = "(\\d+\\s*)+";
+    private static final String NUMERIC_REGEX = "[-+]?\\d+(\\.\\d+)?(\\s+[-+]?\\d+(\\.\\d+)?)*";
 
     public InputType getInputType(String inputString) {
         if (!inputString.isEmpty()) {
