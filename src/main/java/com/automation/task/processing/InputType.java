@@ -4,5 +4,6 @@ public enum InputType {
     Default,
     Number,
     Name,
-    NumberArray
+    NumberArray,
+    ExitCommand
 }

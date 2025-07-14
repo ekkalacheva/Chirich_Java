@@ -1,5 +1,7 @@
 package com.automation.task.processing.strategy;
 
+import com.automation.task.processing.output.OutputHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +15,7 @@ public class NumberArrayProcessingStrategy implements InputProcessingStrategy {
     private static final String NO_MULTIPLES_ELEMENTS_MESSAGE = "There are no elements in the array that are multiples of " + ELEMENTS_DIVISOR + ".";
 
     @Override
-    public String getOutput(String inputString) {
+    public void process(String inputString, OutputHandler outputHandler) {
         String[] inputArray = inputString.split(ELEMENTS_SEPARATOR_REGEX);
         List<String> resultList = new ArrayList<>(inputArray.length);
         for (String item : inputArray) {
@@ -23,15 +25,17 @@ public class NumberArrayProcessingStrategy implements InputProcessingStrategy {
                     resultList.add(item);
                 }
             } catch (NumberFormatException exception) {
-                return DEFAULT_OUTPUT_MESSAGE;
+                outputHandler.handle(DEFAULT_OUTPUT_MESSAGE);
+                return;
             }
         }
 
         if (resultList.isEmpty()) {
-            return NO_MULTIPLES_ELEMENTS_MESSAGE;
+            outputHandler.handle(NO_MULTIPLES_ELEMENTS_MESSAGE);
+            return;
         }
 
-        return resultList.stream()
-                .collect(Collectors.joining(ELEMENTS_SEPARATOR, OUTPUT_MESSAGE_PREFIX, OUTPUT_MESSAGE_SUFFIX));
+        outputHandler.handle(resultList.stream()
+                .collect(Collectors.joining(ELEMENTS_SEPARATOR, OUTPUT_MESSAGE_PREFIX, OUTPUT_MESSAGE_SUFFIX)));
     }
 }

@@ -1,8 +1,10 @@
 package com.automation.task.processing.strategy;
 
+import com.automation.task.processing.output.OutputHandler;
+
 public class DefaultProcessingStrategy implements InputProcessingStrategy {
     @Override
-    public String getOutput(String inputString) {
-        return DEFAULT_OUTPUT_MESSAGE;
+    public void process(String inputString, OutputHandler outputHandler) {
+        outputHandler.handle(DEFAULT_OUTPUT_MESSAGE);
     }
 }

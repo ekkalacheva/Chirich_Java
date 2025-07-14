@@ -1,20 +1,24 @@
 package com.automation.task.processing.strategy;
 
+import com.automation.task.processing.output.OutputHandler;
+
 public class NumberProcessingStrategy implements InputProcessingStrategy {
     private static final int NUMBER_VALUE_FOR_PRINT_HELLO = 7;
     private static final String HELLO_MESSAGE = "Hello";
 
     @Override
-    public String getOutput(String inputString) {
+    public void process(String inputString, OutputHandler outputHandler) {
         try {
             double value = Double.parseDouble(inputString);
             if (value > NUMBER_VALUE_FOR_PRINT_HELLO) {
-                return HELLO_MESSAGE;
+                outputHandler.handle(HELLO_MESSAGE);
+                return;
             }
         } catch (NumberFormatException exception) {
-            return DEFAULT_OUTPUT_MESSAGE;
+            outputHandler.handle(DEFAULT_OUTPUT_MESSAGE);
+            return;
         }
 
-        return DEFAULT_OUTPUT_MESSAGE;
+        outputHandler.handle(DEFAULT_OUTPUT_MESSAGE);
     }
 }

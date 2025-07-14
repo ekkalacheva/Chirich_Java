@@ -26,6 +26,8 @@ public class InputProcessingStrategyFactory {
                 return new NameProcessingStrategy();
             case NumberArray:
                 return new NumberArrayProcessingStrategy();
+            case ExitCommand:
+                return new ExitCommandProcessingStrategy();
             default:
                 throw new RuntimeException(UNSUPPORTED_INPUT_TYPE_MESSAGE);
         }

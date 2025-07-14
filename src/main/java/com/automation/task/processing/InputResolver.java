@@ -1,5 +1,6 @@
 package com.automation.task.processing;
 
+import com.automation.task.processing.strategy.ExitCommandProcessingStrategy;
 import com.automation.task.processing.strategy.NumberArrayProcessingStrategy;
 
 public class InputResolver {
@@ -7,6 +8,10 @@ public class InputResolver {
 
     public InputType getInputType(String inputString) {
         if (!inputString.isEmpty()) {
+            if (inputString.equalsIgnoreCase(ExitCommandProcessingStrategy.EXIT_COMMAND)){
+                return InputType.ExitCommand;
+            }
+
             boolean isNumericInput = inputString.matches(NUMERIC_REGEX);
             if (isNumericInput) {
                 if (inputString.contains(NumberArrayProcessingStrategy.ELEMENTS_SEPARATOR)) {
